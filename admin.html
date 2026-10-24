@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14532d">
+  <title>Agri-Rescue | Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <!-- Login -->
+  <section id="loginPanel" class="login-screen">
+    <div class="login-art">
+      <div class="art-brand">🌱 Agri-Rescue</div>
+      <div class="art-content">
+        <span class="eyebrow">ADMINISTRATION PORTAL</span>
+        <h1>Growing a better future, together.</h1>
+        <p>Manage farmers, buyers, produce and orders from one secure dashboard.</p>
+        <div class="art-leaf">🌿</div>
+        <p class="art-footer">Don't Let Food Become Waste</p>
+      </div>
+    </div>
+
+    <div class="login-area">
+      <form id="loginForm" class="login-card">
+        <div class="login-logo">🔐</div>
+        <span class="eyebrow">WELCOME BACK</span>
+        <h2>Admin Sign In</h2>
+        <p class="muted">Enter your authorized administrator credentials.</p>
+
+        <label for="phone">Admin phone number</label>
+        <input id="phone" type="tel" autocomplete="username"
+               placeholder="Enter phone number" required>
+
+        <label for="password">Password</label>
+        <input id="password" type="password"
+               autocomplete="current-password"
+               placeholder="Enter your password" required>
+
+        <button class="btn btn-primary full-width" type="submit">
+          Sign in to dashboard <span>→</span>
+        </button>
+
+        <p id="loginMessage" class="message" role="alert"></p>
+        <div class="secure-note">🛡️ Authorized administrator access only</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Main application -->
+  <div id="dashboard" class="app-shell hidden">
+    <aside class="sidebar" id="sidebar">
+      <a href="/" class="brand">
+        <span class="brand-icon">🌱</span>
+        <span>Agri-<b>Rescue</b><small>ADMIN CONSOLE</small></span>
+      </a>
+
+      <div class="nav-caption">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Dashboard navigation">
+        <button class="nav-link active" data-tab="overviewSection">
+          <span>▦</span> Overview
+        </button>
+        <button class="nav-link" data-tab="usersSection">
+          <span>♙</span> Farmers & Buyers
+        </button>
+        <button class="nav-link" data-tab="productsSection">
+          <span>▤</span> Products
+        </button>
+        <button class="nav-link" data-tab="ordersSection">
+          <span>▣</span> Orders
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="admin-mini">
+          <div class="avatar">A</div>
+          <div class="admin-mini-text">
+            <b>Administrator</b>
+            <small>Authorized access</small>
+          </div>
+          <span class="online-dot"></span>
+        </div>
+        <button id="logoutBtn" class="logout-btn">↪ &nbsp; Sign out</button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="main-header">
+        <div class="header-left">
+          <button id="menuBtn" class="menu-btn" aria-label="Toggle navigation">☰</button>
+          <div>
+            <div class="breadcrumb">Agri-Rescue <span>/</span> <b id="pageLabel">Overview</b></div>
+            <p class="header-subtitle">Your platform, all in one place.</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <span class="status-pill"><span></span> Admin session</span>
+          <button id="refreshBtn" class="btn btn-outline">↻ Refresh</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <p id="dashboardMessage" class="message" role="status"></p>
+
+        <!-- Overview -->
+        <section id="overviewSection" class="dashboard-section">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">PLATFORM OVERVIEW</span>
+              <h1>Good to see you, Admin 👋</h1>
+              <p class="muted">Here is what's happening across Agri-Rescue.</p>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card">
+              <div class="stat-top"><span>Total Farmers</span><span class="stat-icon green">♙</span></div>
+              <h2 id="farmersCount">—</h2>
+              <p>Registered farmers</p>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span>Total Buyers</span><span class="stat-icon blue">🛒</span></div>
+              <h2 id="buyersCount">—</h2>
+              <p>Registered buyers</p>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span>All Products</span><span class="stat-icon orange">📦</span></div>
+              <h2 id="productsCount">—</h2>
+              <p>Produce listings</p>
+            </article>
+            <article class="stat-card">
+              <div class="stat-top"><span>Total Orders</span><span class="stat-icon purple">🧾</span></div>
+              <h2 id="ordersCount">—</h2>
+              <p>Recorded purchases</p>
+            </article>
+          </div>
+
+          <div class="panel">
+            <div class="panel-heading">
+              <div><h2>Quick access</h2><p class="muted">Explore your platform records.</p></div>
+            </div>
+            <div class="quick-grid">
+              <button class="quick-card" data-tab="usersSection">
+                <span class="quick-icon green">♙</span>
+                <b>Manage Users</b><small>View farmers and buyers</small><span class="quick-arrow">→</span>
+              </button>
+              <button class="quick-card" data-tab="productsSection">
+                <span class="quick-icon orange">📦</span>
+                <b>Product Listings</b><small>Inspect stock and pricing</small><span class="quick-arrow">→</span>
+              </button>
+              <button class="quick-card" data-tab="ordersSection">
+                <span class="quick-icon blue">🧾</span>
+                <b>Order Records</b><small>Review platform orders</small><span class="quick-arrow">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-heading">
+              <div><h2>Latest orders</h2><p class="muted">Most recent recorded purchases.</p></div>
+              <button class="text-btn" data-tab="ordersSection">View all →</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Order</th><th>Product</th><th>Buyer</th><th>Farmer</th><th>Total</th><th>Status</th></tr></thead>
+                <tbody id="recentOrdersTable"><tr><td colspan="6" class="empty">Loading orders...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Users -->
+        <section id="usersSection" class="dashboard-section hidden">
+          <div class="page-heading">
+            <div><span class="eyebrow">USER DIRECTORY</span><h1>Farmers & Buyers</h1><p class="muted">View all registered platform accounts.</p></div>
+          </div>
+          <div class="panel">
+            <div class="panel-heading">
+              <div><h2>Registered users</h2><p class="muted">Account information from the database.</p></div>
+              <span id="usersTotal" class="count-badge">0 users</span>
+            </div>
+            <div class="filters">
+              <input id="userSearch" type="search" placeholder="⌕ Search name, phone or address">
+              <select id="roleFilter" aria-label="Filter by role">
+                <option value="all">All roles</option>
+                <option value="farmer">Farmers</option>
+                <option value="buyer">Buyers</option>
+              </select>
+            </div>
+            <div class="table-wrap">
+              <table><thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>Role</th><th>Address</th></tr></thead>
+                <tbody id="usersTable"><tr><td colspan="5" class="empty">Loading users...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Products -->
+        <section id="productsSection" class="dashboard-section hidden">
+          <div class="page-heading">
+            <div><span class="eyebrow">MARKETPLACE INVENTORY</span><h1>Product Listings</h1><p class="muted">Monitor produce availability and farmer listings.</p></div>
+          </div>
+          <div class="panel">
+            <div class="panel-heading">
+              <div><h2>All products</h2><p class="muted">Price, quantity and seller details.</p></div>
+              <span id="productsTotal" class="count-badge">0 products</span>
+            </div>
+            <div class="filters">
+              <input id="productSearch" type="search" placeholder="⌕ Search product, farmer or location">
+            </div>
+            <div class="table-wrap">
+              <table><thead><tr><th>ID</th><th>Product</th><th>Farmer</th><th>Phone</th><th>Price</th><th>Stock</th><th>Location</th></tr></thead>
+                <tbody id="productsTable"><tr><td colspan="7" class="empty">Loading products...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Orders -->
+        <section id="ordersSection" class="dashboard-section hidden">
+          <div class="page-heading">
+            <div><span class="eyebrow">TRANSACTION RECORDS</span><h1>Orders</h1><p class="muted">Review buyer purchases and order status.</p></div>
+          </div>
+          <div class="panel">
+            <div class="panel-heading">
+              <div><h2>All orders</h2><p class="muted">Order information recorded by the platform.</p></div>
+              <span id="ordersTotal" class="count-badge">0 orders</span>
+            </div>
+            <div class="filters">
+              <input id="orderSearch" type="search" placeholder="⌕ Search order, product, buyer or farmer">
+            </div>
+            <div class="table-wrap">
+              <table><thead><tr><th>Order</th><th>Product</th><th>Buyer</th><th>Farmer</th><th>Qty</th><th>Total</th><th>Status</th></tr></thead>
+                <tbody id="ordersTable"><tr><td colspan="7" class="empty">Loading orders...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer">🌱 Agri-Rescue <span>·</span> Don't Let Food Become Waste</footer>
+      </div>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

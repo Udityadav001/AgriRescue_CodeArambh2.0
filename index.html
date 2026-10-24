@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agri-Rescue | Don't Let Food Become Waste</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a class="logo" href="#" onclick="goHome()">🌱 Agri-Rescue</a>
+    <button id="logoutBtn" class="outline hidden" onclick="logout()">Logout</button>
+  </header>
+
+  <main>
+    <!-- HOME PAGE -->
+    <section id="home" class="hero">
+      <div class="hero-text">
+        <span class="eyebrow">DON'T LET FOOD BECOME WASTE</span>
+        <h1>Save Fresh Food.<br><span>Support Our Farmers.</span></h1>
+        <p>A simple platform connecting farmers directly with buyers to rescue fresh produce and reduce food waste.</p>
+        <div class="stats">
+          <div><strong>01</strong><small>Farmer adds produce</small></div>
+          <div><strong>02</strong><small>Buyer selects produce</small></div>
+          <div><strong>03</strong><small>Digital bill generated</small></div>
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div class="leaf">🌿</div>
+        <h2>Welcome to Agri-Rescue</h2>
+        <p>How would you like to continue?</p>
+        <button class="role-btn farmer-btn" onclick="openAuth('farmer')">
+          <span>👨‍🌾</span>
+          <span><b>Continue as Farmer</b><small>List and manage your produce</small></span>
+          <span>→</span>
+        </button>
+        <button class="role-btn buyer-btn" onclick="openAuth('buyer')">
+          <span>🧺</span>
+          <span><b>Continue as Buyer</b><small>Discover and purchase fresh food</small></span>
+          <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SIGNUP AND LOGIN -->
+    <section id="auth" class="auth-layout hidden">
+      <div class="auth-intro">
+        <span class="eyebrow">YOUR AGRI-RESCUE ACCOUNT</span>
+        <h1 id="authHeading">Join Agri-Rescue</h1>
+        <p id="authDescription">Connect with the Agri-Rescue community.</p>
+        <button class="outline" onclick="goHome()">← Back to home</button>
+      </div>
+
+      <div class="panel">
+        <div class="auth-switch">
+          <button id="signupTab" onclick="setMode('signup')">Sign up</button>
+          <button id="loginTab" onclick="setMode('login')">Login</button>
+        </div>
+        <h2 id="formHeading">Create account</h2>
+        <p class="muted">Account type: <b id="roleName">Farmer</b></p>
+
+        <form id="authForm">
+          <label id="nameWrap">Full name
+            <input id="fullName" placeholder="Enter your full name" required>
+          </label>
+          
+<label id="phoneWrap">Mobile number
+  <input
+    id="authPhone"
+    type="tel"
+    placeholder="Enter 10-digit mobile number"
+    maxlength="10"
+    inputmode="numeric"
+    pattern="[6-9][0-9]{9}"
+    title="Enter a valid 10-digit Indian mobile number"
+    required
+  >
+</label>
+
+          <label>Email address
+            <input id="email" type="email" placeholder="you@example.com" required>
+          </label>
+          <label>Password
+            <input
+  id="password"
+  type="password"
+  minlength="8"
+  placeholder="At least 8 characters"
+  required
+>
+          </label>
+          <button class="primary full" id="authSubmit" type="submit">Create account</button>
+          <p id="authMessage" class="message"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="hidden">
+      <div class="dashboard-heading">
+        <div>
+          <span class="eyebrow">YOUR PERSONAL WORKSPACE</span>
+          <h1 id="dashboardTitle">Dashboard</h1>
+          <p id="dashboardWelcome"></p>
+        </div>
+        <div class="user-chip" id="userChip"></div>
+      </div>
+
+      <!-- FARMER DASHBOARD -->
+      <section id="farmerDashboard" class="hidden">
+        <button class="outline back-home-btn" onclick="goHome()">
+  ← Back to Home
+</button>
+        <div class="summary-grid">
+          <div class="summary-card"><span>🥕</span><p>My Listings</p><h2 id="farmerProductCount">0</h2></div>
+          <div class="summary-card"><span>⚖️</span><p>Stock Remaining</p><h2 id="farmerStock">0 kg</h2></div>
+          <div class="summary-card"><span>📦</span><p>Orders Received</p><h2 id="farmerOrderCount">0</h2></div>
+        </div>
+
+        <div class="content-grid">
+          <div class="panel">
+            <h2>🌱 Add New Produce</h2>
+            <p class="muted">Add product details for buyers to discover.</p>
+            <form id="productForm">
+              <label>Product name
+                <input id="productName" required placeholder="e.g. Fresh tomatoes">
+              </label>
+              <div class="two-col">
+                <label>Price per kg (₹)
+                  <input id="productPrice" type="number" min="0.01" step="0.01" required placeholder="20">
+                </label>
+                <label>Available quantity (kg)
+                  <input id="productQty" type="number" min="0.1" step="0.1" required placeholder="100">
+                </label>
+                
+              </div>
+              <label>Farmer's phone number
+  <input
+    id="farmerPhone"
+    type="tel"
+    placeholder="Enter 10-digit mobile number"
+    maxlength="10"
+    inputmode="numeric"
+    required
+  >
+</label>
+              <label>Farm location
+                <input id="productLocation" required placeholder="Village, City">
+              </label>
+              <label>Product image
+                <input id="productImage" type="file" accept="image/*">
+              </label>
+              <label>Additional information
+                <textarea id="productDescription" rows="3" placeholder="Freshly harvested, quality, pickup details..."></textarea>
+              </label>
+              <button class="primary full" type="submit">＋ Add to marketplace</button>
+              <p id="productMessage" class="message"></p>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h2>My Produce</h2>
+            <p class="muted">Only your own listings appear here.</p>
+            <div id="myProducts" class="stack"></div>
+          </div>
+        </div>
+
+        <div class="panel section-gap">
+          <h2>📦 Orders from Buyers</h2>
+          <div id="farmerOrders" class="stack"></div>
+        </div>
+      </section>
+
+      <!-- BUYER DASHBOARD -->
+      <section id="buyerDashboard" class="hidden">
+        <button class="outline back-home-btn" onclick="goHome()">
+  ← Back to Home
+</button>
+        <button class="outline back-home-btn" onclick="goHome()">
+  ← Back to Home
+</button>
+        <div class="summary-grid">
+          <div class="summary-card"><span>🥬</span><p>Available Products</p><h2 id="availableCount">0</h2></div>
+          <div class="summary-card"><span>🛒</span><p>My Purchases</p><h2 id="buyerOrderCount">0</h2></div>
+          <div class="summary-card"><span>🧾</span><p>Digital Bills</p><h2 id="buyerBillCount">0</h2></div>
+        </div>
+
+        <div class="panel section-gap">
+          <div class="section-heading">
+            <div>
+              <h2>🧺 Fresh Produce Marketplace</h2>
+              <p class="muted">Products listed by farmers are shown here.</p>
+            </div>
+            <input id="searchProducts" class="search" placeholder="Search produce or location...">
+          </div>
+          <div id="marketplace" class="product-grid"></div>
+        </div>
+
+        <div class="panel section-gap">
+          <h2>🧾 My Purchases & Digital Bills</h2>
+          <div id="buyerOrders" class="stack"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- PURCHASE WINDOW -->
+  <div id="purchaseModal" class="modal-backdrop hidden">
+    <div class="panel modal-box">
+      <button class="close-btn" onclick="closePurchase()">✕</button>
+      <h2>Purchase Produce</h2>
+      <p id="purchaseProductInfo" class="muted"></p>
+      <form id="purchaseForm">
+        <label>Quantity to purchase (kg)
+          <input id="purchaseQty" type="number" min="0.1" step="0.1" required>
+        </label>
+        
+<label>Buyer's phone number
+  <input
+    id="buyerPhone"
+    type="tel"
+    placeholder="Enter 10-digit mobile number"
+    maxlength="10"
+    inputmode="numeric"
+    pattern="[6-9][0-9]{9}"
+    title="Enter a valid 10-digit Indian mobile number"
+    required
+  >
+</label>
+
+        <label>Buyer / delivery address
+          <input id="buyerAddress" required placeholder="Your delivery or pickup address">
+        </label>
+        <label>Payment method
+  <select id="paymentMethod" required>
+    <option value="cashfree">Cashfree — UPI / Online Payment</option>
+  </select>
+</label>
+        <div class="total-line"><span>Total amount</span><strong id="purchaseTotal">₹0.00</strong></div>
+       <button class="primary full" type="submit">
+  Pay securely with Cashfree
+</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DIGITAL BILL WINDOW -->
+  <div id="billModal" class="modal-backdrop hidden">
+    <div class="panel bill-modal">
+      <button class="close-btn" onclick="closeBill()">✕</button>
+      <h2>🧾 Your Digital Bill</h2>
+      <p class="muted">Your receipt is generated as an image.</p>
+      <canvas id="billCanvas" width="800" height="1050"></canvas>
+      <button class="primary full" onclick="downloadBill()">⬇ Download bill as PNG</button>
+      <button class="outline full" onclick="printBill()">Print bill</button>
+    </div>
+  </div>
+
+  <footer>
+    <h3>🌱 Agri-Rescue</h3>
+    <p>Rescue food. Support farmers. Reduce waste.</p>
+    <small>Frontend demonstration project</small>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+</body>
+</html>
